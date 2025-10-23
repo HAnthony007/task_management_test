@@ -1,4 +1,8 @@
+import { SidebarInset } from "@/components/ui/sidebar";
+import AppHeader from "@/features/sidebar/app-header";
+import { AppSidebar } from "@/features/sidebar/app-sidebar";
 import { cn } from "@/lib/utils";
+import Providers from "@/providers/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
@@ -34,7 +38,15 @@ export default function RootLayout({
                 )}
             >
                 <Toaster position="top-right" richColors />
-                <main className="flex-1">{children}</main>
+                <main className="flex-1">
+                    <Providers>
+                        <AppSidebar variant="floating" />
+                        <SidebarInset>
+                            <AppHeader />
+                            {children}
+                        </SidebarInset>
+                    </Providers>
+                </main>
             </body>
         </html>
     );
