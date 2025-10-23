@@ -27,9 +27,10 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                     <SidebarMenuItem>
                         <SidebarMenuButton
                             asChild
-                            className="flex justify-center items-center"
+                            className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link href="/">
+                                <Icons.assignation />
                                 <span className="text-base font-semibold">
                                     Task Management
                                 </span>
@@ -38,7 +39,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarContent className="overflow-x-hidden">
                 <SidebarGroup>
                     <SidebarGroupLabel>Menu</SidebarGroupLabel>
                     <SidebarGroupContent>
@@ -58,16 +59,13 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                                                 itemActive ? "text-primary" : ""
                                             } hover:text-primary`}
                                         >
-                                            <Link
-                                                href={item.url}
-                                                className="relative"
-                                            >
+                                            <Link href={item.url}>
                                                 <span
                                                     aria-hidden
                                                     className={`${
                                                         itemActive
                                                             ? "w-1 mr-1 shrink-0 group-data-[collapsible=icon]:hidden"
-                                                            : ""
+                                                            : "w-0 mr-0 shrink-0 group-data-[collapsible=icon]:hidden"
                                                     } `}
                                                 />
                                                 <span

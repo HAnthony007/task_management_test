@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export default function AppHeader() {
     const pathname = usePathname();
     return (
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+        <header className="flex h-16 bg-muted shrink-0 items-center gap-2 rounded-lg mt-2.5 mx-3 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator
                 orientation="vertical"
