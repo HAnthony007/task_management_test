@@ -29,16 +29,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className="h-full">
+        <html lang="en" suppressHydrationWarning className="h-full text-3xl">
             <body
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    "antialiased, h-full flex flex-col"
+                    "antialiased h-full flex flex-col "
                 )}
             >
                 <Toaster position="top-right" richColors />
-                <main className="flex-1">
+                <main className="flex-1 bg-background">
                     <Providers>
                         <AppSidebar variant="floating" />
                         <SidebarInset>

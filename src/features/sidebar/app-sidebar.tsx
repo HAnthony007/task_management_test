@@ -1,3 +1,4 @@
+"use client";
 import { Icons } from "@/components/icons/icon";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,10 +14,12 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
 import { sidebarItems } from "./data/sidebar-data";
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+    const pathname = usePathname();
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
@@ -44,12 +47,54 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                                 const Icon = item.icon
                                     ? Icons[item.icon]
                                     : Icons.dot;
+
+                                const itemActive = pathname === item.url;
                                 return (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton asChild>
-                                            <Link href={item.url}>
-                                                {item.icon && <Icon />}
-                                                <span>{item.title}</span>
+                                        <SidebarMenuButton
+                                            asChild
+                                            isActive={!!itemActive}
+                                            className={`${
+                                                itemActive ? "text-primary" : ""
+                                            } hover:text-primary`}
+                                        >
+                                            <Link
+                                                href={item.url}
+                                                className="relative"
+                                            >
+                                                <span
+                                                    aria-hidden
+                                                    className={`${
+                                                        itemActive
+                                                            ? "w-1 mr-1 shrink-0 group-data-[collapsible=icon]:hidden"
+                                                            : ""
+                                                    } `}
+                                                />
+                                                <span
+                                                    className={`${
+                                                        itemActive
+                                                            ? "absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"
+                                                            : ""
+                                                    }`}
+                                                />
+                                                {item.icon && (
+                                                    <Icon
+                                                        className={`${
+                                                            itemActive
+                                                                ? "text-primary"
+                                                                : ""
+                                                        } `}
+                                                    />
+                                                )}
+                                                <span
+                                                    className={`${
+                                                        itemActive
+                                                            ? "text-primary"
+                                                            : ""
+                                                    } `}
+                                                >
+                                                    {item.title}
+                                                </span>
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
