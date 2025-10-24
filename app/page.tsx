@@ -1,16 +1,12 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-
 export default function Home() {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-            <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <h1>Hello Task management !</h1>
-                <Button onClick={() => toast.success("Welcome !")}>
-                    Click
-                </Button>
-            </main>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+            {Array.from({ length: 24 }).map((_, index) => (
+                <div
+                    key={index}
+                    className="bg-muted/50 aspect-video h-12 w-full rounded-lg"
+                />
+            ))}
         </div>
     );
 }
