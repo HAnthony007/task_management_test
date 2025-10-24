@@ -1,6 +1,7 @@
 "use client";
 import { Icons } from "@/components/icons/icon";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
     Sidebar,
     SidebarContent,
@@ -16,6 +17,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
+import { toast } from "sonner";
 import { sidebarItems } from "./data/sidebar-data";
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
@@ -30,7 +32,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link href="/">
-                                <Icons.assignation />
+                                <Icons.todo />
                                 <span className="text-base font-semibold">
                                     Task Management
                                 </span>
@@ -122,7 +124,15 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                                 </span>
                             </div>
 
-                            <Icons.disconnect className="ml-auto size-4 text-red-500" />
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                onClick={() =>
+                                    toast.success("Déconnexion réussie")
+                                }
+                            >
+                                <Icons.disconnect className="size-4 text-red-500" />
+                            </Button>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
