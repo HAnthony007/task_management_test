@@ -29,3 +29,7 @@ bun build
 # Lancer
 bun start
 ```
+
+## 👥 Contribution
+
+Nous accueillons vos contributions avec plaisir ! 🛠️ Créez une **issue** ou soumettez une **pull request**.
