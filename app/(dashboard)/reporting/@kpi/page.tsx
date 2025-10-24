@@ -1,48 +1,18 @@
 "use client";
 
 import {
-    ChartConfig,
     ChartContainer,
     ChartLegend,
     ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+import { kpiChartConfig } from "@/features/reporting/data/kpi-data";
+import { useKpiQuery } from "@/features/reporting/hooks/use-kpi";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
-// Données d'exemple: Janvier à Décembre, valeurs normalisées (0-20)
-const chartData = [
-    { mois: "Janvier", nombreTache: 12, kpi: 8, retard: 4 },
-    { mois: "Février", nombreTache: 14, kpi: 9, retard: 5 },
-    { mois: "Mars", nombreTache: 13, kpi: 10, retard: 6 },
-    { mois: "Avril", nombreTache: 15, kpi: 11, retard: 7 },
-    { mois: "Mai", nombreTache: 16, kpi: 12, retard: 8 },
-    { mois: "Juin", nombreTache: 17, kpi: 13, retard: 9 },
-    { mois: "Juillet", nombreTache: 18, kpi: 12, retard: 10 },
-    { mois: "Août", nombreTache: 16, kpi: 11, retard: 8 },
-    { mois: "Septembre", nombreTache: 15, kpi: 10, retard: 7 },
-    { mois: "Octobre", nombreTache: 14, kpi: 9, retard: 6 },
-    { mois: "Novembre", nombreTache: 13, kpi: 10, retard: 5 },
-    { mois: "Décembre", nombreTache: 12, kpi: 11, retard: 4 },
-];
-
-// Configuration des 3 séries avec les couleurs demandées
-const chartConfig = {
-    nombreTache: {
-        label: "Nombre de tache",
-        color: "#9e91ff",
-    },
-    kpi: {
-        label: "Kpi",
-        color: "#ffb7b1",
-    },
-    retard: {
-        label: "Retard",
-        color: "#48c7e1",
-    },
-} satisfies ChartConfig;
-
 export default function KpiPage() {
+    const { data: chartData, isLoading, isError, error } = useKpiQuery();
     return (
         <div className="w-full flex justify-center">
             <div className="w-full max-w-5xl">
@@ -51,12 +21,22 @@ export default function KpiPage() {
                         KPI Centre opérationnelle
                     </h1>
                 </div>
-                <ChartContainer config={chartConfig}>
+                <ChartContainer config={kpiChartConfig}>
                     <LineChart
                         accessibilityLayer
                         data={chartData}
                         margin={{ left: 12, right: 12 }}
                     >
+                        {isLoading && (
+                            <text x={0} y={0} className="text-muted-foreground">
+                                Chargement…
+                            </text>
+                        )}
+                        {isError && (
+                            <text x={0} y={0} className="text-destructive">
+                                {String(error)}
+                            </text>
+                        )}
                         <CartesianGrid vertical={false} />
                         <XAxis
                             dataKey="mois"
