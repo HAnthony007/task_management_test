@@ -3,6 +3,7 @@ import {
     Dot,
     GitPullRequestArrowIcon,
     LogOutIcon,
+    UploadIcon,
 } from "lucide-react";
 
 export const Icons = {
@@ -10,4 +11,6 @@ export const Icons = {
     assignation: GitPullRequestArrowIcon,
     reporting: ChartColumnBigIcon,
     disconnect: LogOutIcon,
+
+    exporter: UploadIcon,
 };
