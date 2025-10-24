@@ -34,7 +34,7 @@ export default function RootLayout({
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    "antialiased h-full flex flex-col "
+                    "antialiased h-full flex flex-col overflow-hidden"
                 )}
             >
                 <Toaster position="top-right" richColors />

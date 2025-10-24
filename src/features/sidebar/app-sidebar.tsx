@@ -109,7 +109,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                         <SidebarMenuButton size="lg">
                             <Avatar className="h-8 w-8 rounded-lg">
                                 <AvatarImage src="" />
-                                <AvatarFallback className="rounded-lg text-primary">
+                                <AvatarFallback className="bg-background rounded-lg text-primary">
                                     A
                                 </AvatarFallback>
                             </Avatar>
