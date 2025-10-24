@@ -1,10 +1,11 @@
-import { SidebarInset } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AppHeader from "@/features/sidebar/app-header";
 import { AppSidebar } from "@/features/sidebar/app-sidebar";
 import { cn } from "@/lib/utils";
 import Providers from "@/providers/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CSSProperties } from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -29,7 +30,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className="h-full text-3xl">
+        <html lang="en" suppressHydrationWarning className="h-full text-2xl">
             <body
                 className={cn(
                     geistSans.variable,
@@ -37,16 +38,27 @@ export default function RootLayout({
                     "antialiased h-full flex flex-col overflow-hidden"
                 )}
             >
-                <Toaster position="top-right" richColors />
-                <main className="flex-1 bg-background">
-                    <Providers>
-                        <AppSidebar variant="floating" />
-                        <SidebarInset>
-                            <AppHeader />
-                            {children}
-                        </SidebarInset>
-                    </Providers>
-                </main>
+                <Providers>
+                    <Toaster position="top-right" richColors />
+                    <main className="flex-1 bg-background">
+                        <SidebarProvider
+                            style={
+                                {
+                                    "--sidebar-width":
+                                        "calc(var(--spacing) * 72)",
+                                    "--header-height":
+                                        "calc(var(--spacing) * 12)",
+                                } as CSSProperties
+                            }
+                        >
+                            <AppSidebar variant="floating" />
+                            <SidebarInset>
+                                <AppHeader />
+                                {children}
+                            </SidebarInset>
+                        </SidebarProvider>
+                    </main>
+                </Providers>
             </body>
         </html>
     );
