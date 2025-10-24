@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect, useMemo, useState } from "react";
 import { Cell, Label, Pie, PieChart } from "recharts";
 
 import {
@@ -8,43 +6,11 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
-import { chartConfig, fetchTaskData, type TaskDatum } from "./task-data";
+import { useTasksQuery } from "@/features/reporting/hooks/use-tasks";
+import { chartConfig } from "../../../../src/features/reporting/data/task-data";
 
 export default function TaskPage() {
-    const [raw, setRaw] = useState<TaskDatum[] | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        let mounted = true;
-        (async () => {
-            try {
-                const d = await fetchTaskData();
-                if (mounted) setRaw(d);
-            } catch (e) {
-                if (mounted)
-                    setError(e instanceof Error ? e.message : "Erreur");
-            } finally {
-                if (mounted) setLoading(false);
-            }
-        })();
-        return () => {
-            mounted = false;
-        };
-    }, []);
-
-    const data = useMemo(
-        () =>
-            (raw ?? []).map((d) => ({
-                ...d,
-                fill: `var(--color-${d.status})`,
-            })),
-        [raw]
-    );
-    const total = useMemo(
-        () => data.reduce((acc, d) => acc + d.value, 0),
-        [data]
-    );
+    const { data, total, isLoading, isError, error } = useTasksQuery();
 
     return (
         <div>
@@ -52,13 +18,15 @@ export default function TaskPage() {
                 Status des taches
             </h1>
             <div className="w-full h-full flex items-center justify-center">
-                {loading && (
+                {isLoading && (
                     <div className="text-sm text-muted-foreground">
                         Chargement…
                     </div>
                 )}
-                {error && (
-                    <div className="text-sm text-destructive">{error}</div>
+                {isError && (
+                    <div className="text-sm text-destructive">
+                        {String(error)}
+                    </div>
                 )}
                 <div className="flex items-center gap-8">
                     {/* Donut chart */}
