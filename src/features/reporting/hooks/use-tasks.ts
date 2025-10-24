@@ -1,7 +1,7 @@
 "use client";
 
-import type { TaskDatum } from "@/features/reporting/data/task-data";
 import { fetchTaskData } from "@/features/reporting/data/task-data";
+import type { TaskDatum } from "@/features/reporting/schemas/task-schema";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { useMemo } from "react";
 

@@ -1,11 +1,6 @@
 import type { ChartConfig } from "@/components/ui/chart";
-
-export type KpiPoint = {
-    mois: string;
-    nombreTache: number;
-    kpi: number;
-    retard: number;
-};
+import type { KpiPoint } from "@/features/reporting/schemas/kpi-schema";
+import { KpiArraySchema } from "@/features/reporting/schemas/kpi-schema";
 
 export const kpiData: KpiPoint[] = [
     { mois: "Janvier", nombreTache: 12, kpi: 8, retard: 4 },
@@ -29,5 +24,5 @@ export const kpiChartConfig = {
 } satisfies ChartConfig;
 
 export async function fetchKpiData(): Promise<KpiPoint[]> {
-    return Promise.resolve(kpiData);
+    return KpiArraySchema.parse(kpiData);
 }

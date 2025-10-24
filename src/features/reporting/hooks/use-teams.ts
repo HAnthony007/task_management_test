@@ -1,9 +1,7 @@
 "use client";
 
-import {
-    fetchTeams,
-    type SelectItem,
-} from "@/features/reporting/data/filters-data";
+import { fetchTeams } from "@/features/reporting/data/filters-data";
+import type { SelectItem } from "@/features/reporting/schemas/filters-schema";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 export type UseTeamsResult = {

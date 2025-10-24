@@ -1,4 +1,7 @@
-export type SelectItem = { value: string; label: string };
+import {
+    SelectArraySchema,
+    type SelectItem,
+} from "@/features/reporting/schemas/filters-schema";
 
 // Données figées comme si elles venaient d'une API
 const users: SelectItem[] = [
@@ -24,13 +27,13 @@ const periods: SelectItem[] = [
 ];
 
 export async function fetchUsers(): Promise<SelectItem[]> {
-    return Promise.resolve(users);
+    return SelectArraySchema.parse(users);
 }
 
 export async function fetchTeams(): Promise<SelectItem[]> {
-    return Promise.resolve(teams);
+    return SelectArraySchema.parse(teams);
 }
 
 export async function fetchPeriods(): Promise<SelectItem[]> {
-    return Promise.resolve(periods);
+    return SelectArraySchema.parse(periods);
 }

@@ -1,9 +1,7 @@
 "use client";
 
-import {
-    fetchNumberSumData,
-    type NumberSumData,
-} from "@/features/reporting/data/numbersum-data";
+import { fetchNumberSumData } from "@/features/reporting/data/numbersum-data";
+import type { NumberSumData } from "@/features/reporting/schemas/numbersum-schema";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 export type UseNumberSumResult = {

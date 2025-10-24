@@ -1,8 +1,7 @@
-export type NumberSumData = {
-    totals: { assigned: number; treated: number; percent: number };
-    appTotals: { initiated: number; notTreated: number; percent: number };
-    hours: { onTime: number; late: number; percent: number };
-};
+import {
+    NumberSumSchema,
+    type NumberSumData,
+} from "@/features/reporting/schemas/numbersum-schema";
 
 export const numberSumData: NumberSumData = {
     totals: { assigned: 23, treated: 23, percent: 100 },
@@ -11,5 +10,5 @@ export const numberSumData: NumberSumData = {
 };
 
 export async function fetchNumberSumData(): Promise<NumberSumData> {
-    return Promise.resolve(numberSumData);
+    return NumberSumSchema.parse(numberSumData);
 }

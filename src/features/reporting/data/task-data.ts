@@ -1,4 +1,8 @@
 import type { ChartConfig } from "@/components/ui/chart";
+import {
+    TaskArraySchema,
+    type TaskDatum,
+} from "@/features/reporting/schemas/task-schema";
 
 export const chartConfig: ChartConfig = {
     en_cours: { label: "En cours", color: "#3cc3df" },
@@ -7,15 +11,6 @@ export const chartConfig: ChartConfig = {
     terminee: { label: "Terminée", color: "#4bf230" },
     risque: { label: "À risque", color: "#f15353" },
 };
-
-export type StatusKey =
-    | "en_cours"
-    | "reportee"
-    | "planifiee"
-    | "terminee"
-    | "risque";
-
-export type TaskDatum = { status: StatusKey; value: number };
 
 export const taskData: TaskDatum[] = [
     { status: "en_cours", value: 42 },
@@ -26,5 +21,5 @@ export const taskData: TaskDatum[] = [
 ];
 
 export async function fetchTaskData(): Promise<TaskDatum[]> {
-    return Promise.resolve(taskData);
+    return TaskArraySchema.parse(taskData);
 }

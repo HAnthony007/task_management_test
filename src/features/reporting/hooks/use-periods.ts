@@ -1,9 +1,7 @@
 "use client";
 
-import {
-    fetchPeriods,
-    type SelectItem,
-} from "@/features/reporting/data/filters-data";
+import { fetchPeriods } from "@/features/reporting/data/filters-data";
+import type { SelectItem } from "@/features/reporting/schemas/filters-schema";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 export type UsePeriodsResult = {

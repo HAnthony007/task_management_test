@@ -6,8 +6,8 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+import { chartConfig } from "@/features/reporting/data/task-data";
 import { useTasksQuery } from "@/features/reporting/hooks/use-tasks";
-import { chartConfig } from "../../../../src/features/reporting/data/task-data";
 
 export default function TaskPage() {
     const { data, total, isLoading, isError, error } = useTasksQuery();

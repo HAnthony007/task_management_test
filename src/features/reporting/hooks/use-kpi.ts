@@ -1,9 +1,7 @@
 "use client";
 
-import {
-    fetchKpiData,
-    type KpiPoint,
-} from "@/features/reporting/data/kpi-data";
+import { fetchKpiData } from "@/features/reporting/data/kpi-data";
+import type { KpiPoint } from "@/features/reporting/schemas/kpi-schema";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 export type UseKpiResult = {
